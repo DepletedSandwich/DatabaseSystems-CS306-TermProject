@@ -1,3 +1,3 @@
 function rdir(key){
-    window.location.href = `http://localhost/CS306/${key}/${key}.php`
+    window.location.replace(`http://localhost/CS306/CS306_TermProject/${key}/${key}.php`);
 }

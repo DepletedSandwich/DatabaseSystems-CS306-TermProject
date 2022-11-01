@@ -32,7 +32,7 @@
             $result -> free_result();
         }
         ?>
-        <form id="ins" action="insert.php" method="post">
+        <form action="insert.php" method="post">
             <?php
             foreach ($field_array as $name) {
                 echo "<input type='text' placeholder='$name' name='$name' required>";
