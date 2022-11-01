@@ -2,21 +2,12 @@
 <html>
     <head>
         <title>Insert Operation!</title>
-        <script defer src="insertop.js"></script>
     </head>
     <body>
-        <h1>Completed Redirect!</h1>
+        <h1>Insert Operation Tool</h1>
         <?php
-
-
-        $servername="localhost";
-        $usrname="root";
-        $dbname="cs306_projectdb";
-
-        $conn= new mysqli($servername,$usrname,"",$dbname);
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+        set_include_path('D:\XAMPP\htdocs\CS306\CS306TermProject');
+        include 'config.php';
 
         $display_field = "SELECT COLUMN_NAME
         FROM INFORMATION_SCHEMA.COLUMNS
@@ -46,7 +37,7 @@
             if ($conn->query($insert_query) === TRUE) {
                 echo "New record created successfully";
                 $conn->close();
-                header("Location:http://localhost/CS306/index/index.php");
+                header("Location:http://localhost/CS306/CS306TermProject/index/index.php");
             }
         }
         ?>
