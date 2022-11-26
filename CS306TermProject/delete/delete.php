@@ -11,7 +11,7 @@
     <body>
         <h1>Deletion Tool</h1>
         <?php
-        set_include_path('D:\XAMPP\htdocs\CS306\CS306TermProject');
+        set_include_path('D:\XAMPP\htdocs\CS306TermProject\CS306TermProject');
         include 'config.php';
         $display_field = "SELECT COLUMN_NAME
         FROM INFORMATION_SCHEMA.COLUMNS
@@ -60,7 +60,7 @@
             if ($conn->query($deletion_query) === TRUE) {
                 echo "New record created successfully";
                 $conn->close();
-                header("Location:http://localhost/CS306/CS306TermProject/index/index.php");
+                header("Location:http://localhost/CS306TermProject/CS306TermProject/index/index.php");
             }
         }
         ?>
