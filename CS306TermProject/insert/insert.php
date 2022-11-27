@@ -6,7 +6,7 @@
     <body>
         <h1>Insert Operation Tool</h1>
         <?php
-        set_include_path('D:\XAMPP\htdocs\CS306TermProject\CS306TermProject');
+        set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject");        
         include 'config.php';
 
         $display_field = "SELECT COLUMN_NAME

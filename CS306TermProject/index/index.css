@@ -1,0 +1,23 @@
+#tbl{
+    color:red;
+    font-style: italic;
+    font-family:'Times New Roman', Times, serif;
+}
+.idxbutton{
+    background-color: #e7e7e7;
+    transition-duration: 0.4s;
+    border-radius: 10px;
+    color:black;
+    font-family:'Times New Roman', Times, serif;
+    font-size: x-large;
+    height: 75px;
+    width: 120px;
+}
+.idxbutton:hover{
+    background-color: white;
+}
+.btnedt{
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+}

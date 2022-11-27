@@ -11,7 +11,7 @@
     <body>
         <h1>Selection Tool</h1>
         <?php
-        set_include_path('D:\XAMPP\htdocs\CS306TermProject\CS306TermProject');
+        set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject");
         include 'config.php';
         $display_field = "SELECT COLUMN_NAME
         FROM INFORMATION_SCHEMA.COLUMNS

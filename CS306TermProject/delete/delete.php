@@ -11,7 +11,7 @@
     <body>
         <h1>Deletion Tool</h1>
         <?php
-        set_include_path('D:\XAMPP\htdocs\CS306TermProject\CS306TermProject');
+        set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject");
         include 'config.php';
         $display_field = "SELECT COLUMN_NAME
         FROM INFORMATION_SCHEMA.COLUMNS
@@ -51,14 +51,25 @@
         ?>
         </table>
         <form action="delete.php" method="post">
-            <input type="text" name="sid" placeholder="sid" required>
+            <select name="sid">
+                <?php
+                $sid_table_query = "SELECT S.sid FROM stadium S";
+                if ($result = $conn -> query($sid_table_query)){
+                    while ($obj = $result -> fetch_array()) {   
+                        for ($i=0; $i < sizeof($obj)-1; $i++) { 
+                            $item = $obj[$i];
+                            echo "<option>$item</option>";
+                        }
+                    }  
+                }
+                ?>
+            </select>
             <input type="submit">
         </form>
         <?php
         if (empty($_POST["sid"])==false) {
             $deletion_query= sprintf("DELETE FROM stadium WHERE sid=%s",$_POST["sid"]);
             if ($conn->query($deletion_query) === TRUE) {
-                echo "New record created successfully";
                 $conn->close();
                 header("Location:http://localhost/CS306TermProject/CS306TermProject/index/index.php");
             }
