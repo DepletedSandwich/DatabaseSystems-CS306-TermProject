@@ -13,10 +13,10 @@
         <?php
         set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject");
         include 'config.php';
-        $display_field = "SELECT COLUMN_NAME
+        $display_field = sprintf("SELECT COLUMN_NAME
         FROM INFORMATION_SCHEMA.COLUMNS
-        WHERE TABLE_NAME = 'stadium'
-        ORDER BY ORDINAL_POSITION";
+        WHERE TABLE_NAME = '%s'
+        ORDER BY ORDINAL_POSITION",$_GET["id"]);
         $header_array = array();
         if ($result = $conn -> query($display_field)) {
             while ($obj = $result -> fetch_object()) {
@@ -34,7 +34,7 @@
             ?>
             </tr>
             <?php
-            $table_query = "SELECT * FROM stadium";
+            $table_query = sprintf("SELECT * FROM %s",$_GET["id"]);
             if ($result = $conn -> query($table_query)) {
                 while ($obj = $result -> fetch_array()) {?>
                     <tr>
@@ -50,10 +50,10 @@
             }
         ?>
         </table>
-        <form action="delete.php" method="post">
-            <select name="sid">
+        <form action="delete.php?id=<?php echo $_GET["id"]?>" method="post">
+            <select name="primary_key">
                 <?php
-                $sid_table_query = "SELECT S.sid FROM stadium S";
+                $sid_table_query = sprintf("SELECT $header_array[0] FROM %s",$_GET["id"]);
                 if ($result = $conn -> query($sid_table_query)){
                     while ($obj = $result -> fetch_array()) {   
                         for ($i=0; $i < sizeof($obj)-1; $i++) { 
@@ -67,11 +67,11 @@
             <input type="submit">
         </form>
         <?php
-        if (empty($_POST["sid"])==false) {
-            $deletion_query= sprintf("DELETE FROM stadium WHERE sid=%s",$_POST["sid"]);
+        if (empty($_POST["primary_key"])==false) {
+            $deletion_query= sprintf("DELETE FROM %s WHERE $header_array[0]=%s",$_GET["id"],$_POST["primary_key"]);
             if ($conn->query($deletion_query) === TRUE) {
                 $conn->close();
-                header("Location:http://localhost/CS306TermProject/CS306TermProject/index/index.php");
+                header("Location:http://localhost/CS306TermProject/CS306TermProject/admin/admin.php");
             }
         }
         ?>
