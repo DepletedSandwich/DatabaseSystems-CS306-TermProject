@@ -2,9 +2,10 @@
 <html>
     <head>
         <title>Insert Operation!</title>
+        <link rel="stylesheet" href="insertstyle.css">
     </head>
     <body>
-        <h1>Insert Operation Tool</h1>
+        <h1>Inserting row into <span id="tbl"><?php echo $_GET["id"];?></span></h1>
         <?php
         set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject");        
         include 'config.php';
@@ -30,10 +31,12 @@
             <?php
             foreach ($field_array as $column_name => $data_type) {
                 if ($data_type == "char" or $data_type == "int") {
-                    echo "<input type='text' placeholder='$column_name' name='$column_name' required>";
+                    echo "<label for=".$column_name.">$column_name:</label>";
+                    echo "<input type='text' id='$column_name' name='$column_name' placeholder='$column_name' required>";
                 }
                 elseif($data_type == "date"){
-                    echo "<input type='date'name='$column_name' required>";
+                    echo "<label for=".$column_name.">$column_name:</label>";
+                    echo "<input type='date' id='$column_name' name='$column_name' required>";
                 }
             }
             ?>

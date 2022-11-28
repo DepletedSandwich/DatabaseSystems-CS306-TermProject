@@ -1,0 +1,52 @@
+#tbl{
+    color:red;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+form {
+    width: 60%;
+    height: 100%;
+    position: fixed;
+}
+
+label, input[type=submit] {
+    display: inline-block;
+    margin: 10px;
+}
+
+label {
+    width: 30%;
+    text-align: left;
+    /*text design for label*/
+    font-size:large;
+}
+
+label+input {
+    width: 25%;
+    height: 3%;
+    margin: 0 30% 0 3%;
+}
+
+input[type=submit]{
+    width: 20%;
+    height: 20%;
+    position: absolute;
+    top:0px;
+    right: 0px;
+    /*styling*/
+    background-color: white;
+    border: 3px solid;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+input[type=submit]:hover {
+    background-color: #4CAF50;
+    color: white;
+    border: 3px solid black;
+}
+
+input::-webkit-input-placeholder {
+    opacity: 0.3;
+    font-style: italic;
+}
