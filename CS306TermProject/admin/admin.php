@@ -7,7 +7,7 @@
     <body>
         <h1>Welcome, admin!</h1>
         <?php 
-        set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject");
+        set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject/Misc");
         include 'config.php';
         $dbtable_query="SHOW TABLES";
         $querytableitem = array();

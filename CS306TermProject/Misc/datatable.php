@@ -1,7 +1,30 @@
+<style>
+#tbl {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#tbl td, #tbl th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tbl tr:nth-child(even){background-color: #f2f2f2;}
+
+#tbl tr:hover {background-color: #ddd;}
+
+#tbl th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: red;
+  color: white;
+  font-size: small;
+}
+</style>
 
 <?php
-set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject");
-include 'config.php';
 $display_field = sprintf("SELECT COLUMN_NAME
 FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_NAME = '%s'
@@ -14,7 +37,7 @@ if ($result = $conn -> query($display_field)) {
     $result -> free_result();
 }
 ?>
-<table>
+<table id="tbl" style="overflow-x:auto;">
     <tr>
     <?php
     foreach($header_array as $header){

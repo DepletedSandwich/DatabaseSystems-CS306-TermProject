@@ -1,52 +1,52 @@
-#tbl{
-    color:red;
-    font-style: italic;
-    font-family: 'Times New Roman', Times, serif;
-}
-
-form {
-    width: 60%;
+body {
     height: 100%;
-    position: fixed;
 }
-
-label, input[type=submit] {
-    display: inline-block;
-    margin: 10px;
+h1{
+    position: relative;
+    margin: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
 }
-
-label {
-    width: 30%;
-    text-align: left;
-    /*text design for label*/
-    font-size:large;
+#tbl{
+    color: red;
+    font-style: italic;
 }
-
-label+input {
-    width: 25%;
-    height: 3%;
-    margin: 0 30% 0 3%;
+.form-container {
+    height: 100%;
+    margin:0px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-
+.form-container .form-group{
+    flex: 1;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.form-container .form-group:last-of-type{
+    margin-bottom: 0;
+}
+input{
+    width: 20rem;
+    height:2.5rem;
+}
 input[type=submit]{
-    width: 20%;
-    height: 20%;
-    position: absolute;
-    top:0px;
-    right: 0px;
-    /*styling*/
-    background-color: white;
-    border: 3px solid;
+    height: 40px;
+    border-radius: 5px;
     transition-duration: 0.4s;
-    cursor: pointer;
+    cursor: pointer;  
 }
-input[type=submit]:hover {
+input[type=submit]:hover{
     background-color: #4CAF50;
     color: white;
-    border: 3px solid black;
 }
-
-input::-webkit-input-placeholder {
-    opacity: 0.3;
+input::placeholder{
+    opacity: 0.5;
     font-style: italic;
+}
+label{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 450;
+    font-size: x-large;
 }

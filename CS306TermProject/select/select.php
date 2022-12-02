@@ -11,7 +11,7 @@
     <body>
         <h1>Selection Tool</h1>
         <?php
-        set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject");
+        set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject/Misc");
         include 'config.php';
         include 'datatable.php';
         ?>
