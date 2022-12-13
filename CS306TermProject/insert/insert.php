@@ -21,11 +21,7 @@
         if ($result = $conn -> query($display_field)) {
             $counter = 0;
             while ($obj = $result -> fetch_object()) { //Because of autoincrement we don't take primary key as input
-                if ($counter == 0) {
-                    $counter++;
-                }else{
                     $field_array[$obj->COLUMN_NAME] = $obj->DATA_TYPE;
-                }
             }
             $result -> free_result();
         }
@@ -37,8 +33,8 @@
                     foreach ($field_array as $column_name => $data_type) {
                         echo '<div class="form-group row">';
                         echo "<label class="."col-sm-3 col-form-label"." for=".$column_name.">$column_name:</label>";
-                        if ($data_type == "char" or $data_type == "int") {
-                            echo "<div class='col-sm-9'><input type='text' id='$column_name' name='$column_name' placeholder='$column_name' required></div>";
+                        if ($data_type == "char" or $data_type == "int" or $data_type == "double") {
+                            echo "<div class='col-sm-9'><input type='text' id='$column_name' name='$column_name' placeholder='$data_type' required></div>";
                         }
                         elseif($data_type == "date"){
                             echo "<div class='col-sm-9'><input type='date' id='$column_name' name='$column_name' required></div>";
@@ -67,7 +63,7 @@
                 if ($data_type == "char" or $data_type == "date") {
                     $insert_query = $insert_query."'".$_POST[$column_name]."',";
                 }
-                else if($data_type == "int"){
+                else if($data_type == "int" or $data_type == "double"){
                     $insert_query = $insert_query.$_POST[$column_name].",";
                 }
             }

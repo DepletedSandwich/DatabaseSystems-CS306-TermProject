@@ -18,7 +18,6 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: red;
   color: white;
   font-size: small;
 }

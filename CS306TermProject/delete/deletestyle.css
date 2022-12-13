@@ -33,3 +33,6 @@ input[type=submit]:hover{
     background-color: red;
     color:white;
 }
+table th{
+    background-color: red;
+}

@@ -1,0 +1,12 @@
+h1{
+    position: relative;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+}
+#tbl_name{
+    color: red;
+    font-style: italic;
+}
+table th{
+    background-color: blue;
+}

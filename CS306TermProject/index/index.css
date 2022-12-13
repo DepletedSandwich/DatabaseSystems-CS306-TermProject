@@ -13,11 +13,21 @@
     height: 75px;
     width: 120px;
 }
-.idxbutton:hover{
-    background-color: white;
-}
 .btnedt{
     display: flex;
     justify-content: space-between;
     width: 400px;
+    height: 300px;
+}
+.idxbutton:hover{
+    color:white;
+}
+#insert:hover{
+    background-color: green;
+}
+#delete:hover{
+    background-color: red;
+}
+#select:hover{
+    background-color: blue;
 }

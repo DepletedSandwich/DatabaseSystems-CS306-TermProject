@@ -2,14 +2,13 @@
 <html>
     <head>
         <title>Select Operation</title>
+        <link rel="stylesheet" href="selectstyle.css">
         <style>
-            table, th, td {
-            border:1px solid black;
-            }
+            
         </style>
     </head>
     <body>
-        <h1>Selection Tool</h1>
+        <h1>Selecting rows from <span id="tbl_name"><?php echo $_GET["id"];?></span></h1>
         <?php
         set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject/Misc");
         include 'config.php';
@@ -70,7 +69,7 @@
 
         function testfun()
         {
-            header("Location:http://localhost/CS306TermProject/CS306TermProject/index/index.php");
+            header("Location:http://localhost/CS306TermProject/CS306TermProject/admin/admin.php");
         }
 
         if(array_key_exists('test',$_POST)){
