@@ -73,6 +73,7 @@
                 $conn->close();
                 header("Location:http://localhost/CS306TermProject/CS306TermProject/admin/admin.php");
             }
+            
         }
         ?>
     </body>

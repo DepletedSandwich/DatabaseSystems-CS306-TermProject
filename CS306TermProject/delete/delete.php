@@ -10,6 +10,7 @@
         set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject/Misc");
         include 'config.php';
         include 'datatable.php';
+        $sorted_array = array();
         ?>
         <form action="delete.php?id=<?php echo $_GET["id"]?>" method="post">
             <div id="adj_id">
@@ -22,9 +23,13 @@
                             while ($obj = $result -> fetch_array()) {   
                                 for ($i=0; $i < sizeof($obj)-1; $i++) { 
                                     $item = $obj[$i];
-                                    echo "<option>$item</option>";
+                                    array_push($sorted_array,intval($item));
                                 }
                             }  
+                        }
+                        sort($sorted_array);
+                        for ($i=0; $i < sizeof($sorted_array) ; $i++) { 
+                            echo "<option>".$sorted_array[$i]."</option>";
                         }
                         ?>
                     </select>

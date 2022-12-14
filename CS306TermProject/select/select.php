@@ -34,7 +34,7 @@
                 if ($conn->query($selection_query) == TRUE) {
                     echo "Selection of WHERE sid = " . $_POST["sid"];
                 
-                    //header("Location:http://localhost:9090/CS306/CS_306_Tuto/index/index.php");
+                    header("Location:http://localhost/CS306/CS_306_Tuto/index/index.php?id=stadium");
                 }
             }
             ?>
