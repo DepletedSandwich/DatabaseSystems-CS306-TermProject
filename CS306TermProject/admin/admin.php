@@ -9,13 +9,11 @@
         <?php 
         set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject/Misc");
         include 'config.php';
-        $dbtable_query="SHOW TABLES";
+        $dbtable_query="SHOW FULL TABLES WHERE Table_Type = 'BASE TABLE'";
         $querytableitem = array();
         if($result = $conn -> query($dbtable_query)){
             while ($obj = $result -> fetch_array()) {
-                for ($i=0; $i<count($obj)-1 ; $i++) { 
-                    array_push($querytableitem,$obj[$i]);
-                }
+                array_push($querytableitem,$obj[0]);
             }
         }
         ?>

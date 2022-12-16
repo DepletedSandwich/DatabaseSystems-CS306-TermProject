@@ -1,4 +1,4 @@
-#tbl{
+#tblname{
     color:red;
     font-style: italic;
     font-family:'Times New Roman', Times, serif;
@@ -12,6 +12,9 @@
     font-size: x-large;
     height: 75px;
     width: 120px;
+}
+#tbl th{
+    background-color: purple;
 }
 .btnedt{
     display: flex;
