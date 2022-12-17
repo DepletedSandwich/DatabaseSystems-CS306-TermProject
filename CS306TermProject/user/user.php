@@ -152,7 +152,7 @@
     <form action="user.php?option=teams" method="post">
         <select class ="form-select" name="teams" id="teams">
             <?php
-            $team_names_query = "SELECT teamname FROM team";
+            $team_names_query = "SELECT teamname FROM teams";
             if ($result = $conn->query($team_names_query)) {
                 while($obj = $result->fetch_object()){ 
                     echo "<option>".$obj->teamname."</option>";
@@ -164,12 +164,12 @@
     </form>
     <?php
         if (!empty($_POST)) {
-            $team_info_query = 'SELECT team.founddate, stadium.sname, technicdirector.tname,leagues.lgname
-            FROM team
-            INNER JOIN stadium
-            INNER JOIN technicdirector
+            $team_info_query = 'SELECT teams.founddate, stadiums.sname, technic_directors.tname,leagues.lgname
+            FROM teams
+            INNER JOIN stadiums
+            INNER JOIN technic_directors
             INNER JOIN leagues
-            WHERE stadium.sid = team.teamstadiumid AND technicdirector.tid=team.teamtechnicdirectorid AND leagues.lgid=team.teamleagueid AND team.teamname="'.$_POST["teams"].'"';
+            WHERE stadiums.sid = teams.teamstadiumid AND technic_directors.tid=teams.teamtechnicdirectorid AND leagues.lgid=teams.teamleagueid AND teams.teamname="'.$_POST["teams"].'"';
             if ($result = $conn->query($team_info_query)) {
                 while ($obj = $result->fetch_object()) {?>
                     <h1 id="team_name">Team Name: <span><?php echo $_POST["teams"];?></span></h1>
@@ -187,8 +187,8 @@
             <?php
             $team_roster_query = 'SELECT players.pname,players.pbirthplace,players.pbirthdate,players.pposition,players.pheight,players.pweight,players.pcontractstart,players.pcontractend,players.pwage
             FROM players
-            INNER JOIN team ON players.pteamid = team.teamid
-            WHERE team.teamname="'.$_POST["teams"].'"';?>
+            INNER JOIN teams ON players.pteamid = teams.teamid
+            WHERE teams.teamname="'.$_POST["teams"].'"';?>
             <table>
                 <tr>
                     <th>Name</th>
