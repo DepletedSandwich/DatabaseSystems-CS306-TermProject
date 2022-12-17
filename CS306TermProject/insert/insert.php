@@ -11,7 +11,9 @@
         <?php
         set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject/Misc");        
         include 'config.php';
-        include 'datatable.php';
+        if (empty($_POST)===true) {
+            include 'datatable.php';
+        }
         $display_field = sprintf("SELECT COLUMN_NAME,DATA_TYPE
         FROM INFORMATION_SCHEMA.COLUMNS
         WHERE TABLE_NAME = '%s'
@@ -73,10 +75,8 @@
             $insert_query=substr_replace($insert_query,"",-1);
             $insert_query=$insert_query.")";
             if ($conn->query($insert_query) === TRUE) {
-                $conn->close();
                 header("Location:http://localhost/CS306TermProject/CS306TermProject/index/index.php?id=".$_GET["id"]);
             }
-            
         }
         ?>
     </body>

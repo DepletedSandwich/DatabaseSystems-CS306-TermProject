@@ -22,7 +22,6 @@
   font-size: small;
 }
 </style>
-
 <?php
 $display_field = sprintf("SELECT COLUMN_NAME
 FROM INFORMATION_SCHEMA.COLUMNS
@@ -35,29 +34,24 @@ if ($result = $conn -> query($display_field)) {
     }
     $result -> free_result();
 }
-?>
-<table id="tbl" style="overflow-x:auto;">
-    <tr>
-    <?php
-    foreach($header_array as $header){
-        echo "<th>$header</th>";
-    }           
-    ?>
-    </tr>
-    <?php
-    $table_query = sprintf("SELECT * FROM %s",$_GET["id"]);
-    if ($result = $conn -> query($table_query)) {
-        while ($obj = $result -> fetch_array()) {?>
-            <tr>
-            <?php
-            for ($i=0; $i < count($header_array); $i++) {
-                $item=$obj[$i];
-                echo "<td>$item</td>";
-            }?>
-            </tr>
-        <?php
+echo '<table id="tbl" style="overflow-x:auto;">';
+echo "<tr>";
+foreach($header_array as $header){
+    echo "<th>$header</th>";
+} 
+echo "</tr>";
+
+$table_query = sprintf("SELECT * FROM %s",$_GET["id"]);
+if ($result = $conn -> query($table_query)) {
+    while ($obj = $result -> fetch_array()) {
+        echo "<tr>";
+        for ($i=0; $i < count($header_array); $i++) {
+            $item=$obj[$i];
+            echo "<td>$item</td>";
         }
-        $result -> free_result();
+        echo "</tr>";
     }
+    $result -> free_result();
+}
+echo "</table>";
 ?>
-</table>

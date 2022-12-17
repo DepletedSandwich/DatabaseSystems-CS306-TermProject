@@ -11,7 +11,9 @@
         <?php
         set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject/Misc");
         include 'config.php';
-        include 'datatable.php';
+        if (empty($_POST)===true) {
+            include 'datatable.php';
+        }
         ?>
         <form action="delete.php?id=<?php echo $_GET["id"]?>" method="post">
             <div id="adj_id">
@@ -70,8 +72,9 @@
                     $deletion_query = $deletion_query.$primary_keys;
                 }
             }
-            echo $deletion_query;
+
             if ($conn->query($deletion_query) === TRUE) {
+
                 $conn->close();
                 header("Location:http://localhost/CS306TermProject/CS306TermProject/index/index.php?id=".$_GET["id"]);
             }
