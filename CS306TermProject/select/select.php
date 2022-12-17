@@ -8,7 +8,7 @@
         </style>
     </head>
     <body>
-        <h1>Selecting rows from <span id="tbl_name"><?php echo $_GET["id"];?></span></h1>
+        <h1>Selecting tuples from <span id="tbl_name"><?php echo $_GET["id"];?></span></h1>
         <?php
         set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject/Misc");
         include 'config.php';

@@ -1,12 +1,20 @@
+body{
+    margin: 8px;
+}
 #adj_id{
     display: flex;
     justify-content: right;
 }
 h1{
+    font-size: 2em;
     font-family: 'Times New Roman', Times, serif;
     font-weight: bolder;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
 }
-#tbl_name{
+#tblname{
     color: red;
     font-style: italic;
 }
@@ -35,4 +43,18 @@ input[type=submit]:hover{
 }
 table th{
     background-color: red;
+}
+#redirectbtn{
+    border: none;
+    background: none;   
+}
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+.left {
+    transform: rotate(135deg);
+    margin-bottom: 50%;
 }

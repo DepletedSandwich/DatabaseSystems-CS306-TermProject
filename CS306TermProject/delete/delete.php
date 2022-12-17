@@ -2,10 +2,12 @@
 <html>
     <head>
         <title>Delete Operation</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <link rel="stylesheet" href="deletestyle.css">
+        <script defer src="../Misc/redirect.js"></script>
     </head>
     <body>
-        <h1>Deleting tuple from <span id="tbl_name"><?php echo $_GET["id"];?></span></h1>
+        <h1><span><button id="redirectbtn" onclick="redirect_table_index('<?php echo $_GET['id']?>')"><i class="arrow left"></i></button></span>Deleting tuple from <span id="tblname"><?php echo $_GET["id"];?></span></h1>
         <?php
         set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject/Misc");
         include 'config.php';

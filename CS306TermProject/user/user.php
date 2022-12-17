@@ -195,11 +195,11 @@
                     <th>Birthplace</th>
                     <th>Birthdate</th>
                     <th>Position</th>
-                    <th>Height</th>
-                    <th>Weight</th>
+                    <th>Height(cm)</th>
+                    <th>Weight(kg)</th>
                     <th>Contract Start</th>
                     <th>Contract End</th>
-                    <th>Wage</th>
+                    <th>Wage(€)</th>
                 </tr>
             <?php
             if ($result = $conn->query($team_roster_query)) {
@@ -215,7 +215,7 @@
     <?php
     }
     }elseif ($_GET["option"] == "players") {
-        echo "teams";
+        echo "stuff";    
     }
     ?>
 </html>
