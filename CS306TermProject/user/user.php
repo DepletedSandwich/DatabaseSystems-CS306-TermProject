@@ -48,6 +48,13 @@
                 font-style: italic;
                 font-weight: bold;
             }
+            #league_name span{
+                color: red;
+                font-style: italic;
+            }
+            #league_stats{
+                font-style: italic;
+            }
         </style>
     </head>
     <body>
@@ -65,7 +72,7 @@
                     <a class="nav-link" href="http://localhost/CS306TermProject/CS306TermProject/user/user.php?option=teams">Teams</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/CS306TermProject/CS306TermProject/user/user.php?option=players">Players</a>
+                    <a class="nav-link" href="http://localhost/CS306TermProject/CS306TermProject/user/user.php?option=leagues">Leagues</a>
                 </li>
               </ul>
             </div>
@@ -163,15 +170,18 @@
         <button>Fetch Result</button>
     </form>
     <?php
-        if (!empty($_POST)) {
+        if (empty($_POST) !== TRUE) {
+            $team_name = $_POST["teams"];
+            $val=mysqli_real_escape_string($conn,$team_name);
+
             $team_info_query = 'SELECT teams.founddate, stadiums.sname, technic_directors.tname,leagues.lgname
             FROM teams
             INNER JOIN stadiums
             INNER JOIN technic_directors
             INNER JOIN leagues
-            WHERE stadiums.sid = teams.teamstadiumid AND technic_directors.tid=teams.teamtechnicdirectorid AND leagues.lgid=teams.teamleagueid AND teams.teamname="'.$_POST["teams"].'"';
+            WHERE stadiums.sid = teams.teamstadiumid AND technic_directors.tid=teams.teamtechnicdirectorid AND leagues.lgid=teams.teamleagueid AND teams.teamname="'.$val.'"';
             if ($result = $conn->query($team_info_query)) {
-                while ($obj = $result->fetch_object()) {?>
+                if($obj = $result->fetch_object()) {?>
                     <h1 id="team_name">Team Name: <span><?php echo $_POST["teams"];?></span></h1>
                     <div id="teaminfo">
                         <h4>Found in: <span><?php $fdate= getDate(strtotime($obj->founddate)); echo $fdate["mday"]." ".$fdate["month"]." ".$fdate["year"];?></span></h4>
@@ -214,8 +224,70 @@
             </table>
     <?php
     }
-    }elseif ($_GET["option"] == "players") {
-        echo "stuff";    
+    }elseif ($_GET["option"] == "leagues") {?>
+        <form action="user.php?option=leagues" method="post">
+            <select class ="form-select" name="leagues" id="leagues">
+                <?php
+                $team_names_query = "SELECT lgname FROM leagues ORDER BY lgid";
+                if ($result = $conn->query($team_names_query)) {
+                    while($obj = $result->fetch_object()){ 
+                        echo "<option>".$obj->lgname."</option>";
+                    }
+                }
+                ?>
+            </select>
+        <button>Fetch Result</button>
+        </form>
+    <?php
+        if (empty($_POST) !== TRUE) {
+            $league_name = $_POST["leagues"];
+            $val=mysqli_real_escape_string($conn,$league_name);
+
+            $league_info_query = "SELECT leagues.lgname,tff_managers.mname,leagues.managed_since
+            FROM leagues
+            INNER JOIN tff_managers
+            WHERE leagues.manager_id = tff_managers.mtffid AND leagues.lgname = '".$val."'";
+            if ($result = $conn->query($league_info_query)) {
+                if($obj = $result->fetch_object()) {?>
+                    <h1 id="league_name">League Name: <span><?php echo $_POST["leagues"];?></span></h1>
+                    <div id="teaminfo">
+                        <h4>Manager: <span><?php echo $obj->mname;?></span></h4>
+                        <h4>Manager Since: <span><?php $fdate= getDate(strtotime($obj->managed_since)); echo $fdate["mday"]." ".$fdate["month"]." ".$fdate["year"];?></span></h4>
+                    </div>
+            <?php
+                }
+            }
+
+            $player_stats_query = "SELECT teams.teamname,players.pposition,players.pname,player_stats.pmatchattended,player_stats.pgoal,player_stats.passist,player_stats.ppasspercentage,player_stats.predcard,player_stats.pyellowcard
+            FROM (((leagues INNER JOIN teams ON teams.teamleagueid = leagues.lgid) INNER JOIN players ON players.pteamid=teams.teamid) INNER JOIN player_stats ON player_stats.statid = players.pstatid)
+            WHERE leagues.lgname = '".$val."' ORDER BY player_stats.pmatchattended DESC";?>
+            <h3 id="league_stats">League Player Stats: </h3>
+            <table>
+                <tr>
+                    <th>Team Name</th>
+                    <th>Player Position</th>
+                    <th>Player Name</th>
+                    <th>Attended Matches</th>
+                    <th>Goals</th>
+                    <th>Assists</th>
+                    <th>Pass Percentage(%)</th>
+                    <th>Red Cards</th>
+                    <th>Yellow Cards</th>
+                </tr>
+            <?php
+            if ($result = $conn->query($player_stats_query)) {
+                while ($obj = $result->fetch_object()) {
+                    echo "<tr>";
+                    foreach ($obj as $key => $value) {
+                        echo "<td>".$value."</td>";
+                    }
+                    echo "</tr>";
+                }
+            }
+            ?>
+        </table>
+    <?php
     }
+}
     ?>
 </html>

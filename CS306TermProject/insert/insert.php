@@ -59,11 +59,15 @@
             $insert_query=substr_replace($insert_query,"",-1);
             $insert_query = $insert_query.") VALUES(";
             foreach ($field_array as $column_name => $data_type) {
+
+                $val = $_POST[$column_name];
+                $insert_val=mysqli_real_escape_string($conn,$val);
+                
                 if ($data_type == "char" or $data_type == "date") {
-                    $insert_query = $insert_query."'".$_POST[$column_name]."',";
+                    $insert_query = $insert_query."'".$insert_val."',";
                 }
                 else if($data_type == "int" or $data_type == "double"){
-                    $insert_query = $insert_query.$_POST[$column_name].",";
+                    $insert_query = $insert_query.$insert_val.",";
                 }
             }
             $insert_query=substr_replace($insert_query,"",-1);
