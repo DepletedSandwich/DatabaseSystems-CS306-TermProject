@@ -21,7 +21,11 @@
             <tr><th>Tables of database</th></tr>
             <?php
             for ($i=0; $i < count($querytableitem); $i++) {
-                ?><tr><td><a href="http://localhost/CS306TermProject/CS306TermProject/index/index.php?id=<?php echo $querytableitem[$i];?>" id="<?php echo $querytableitem[$i];?>"><?php echo ucfirst($querytableitem[$i]);?></a></td></tr> <?php
+                $val_string = str_replace("_"," ",$querytableitem[$i]);
+                if (strpos($val_string," ")==true) {
+                    $val_string[strpos($val_string," ")+1]=ucfirst($val_string[strpos($val_string," ")+1]);
+                }
+                ?><tr><td><a href="http://localhost/CS306TermProject/CS306TermProject/index/index.php?id=<?php echo $querytableitem[$i];?>" id="<?php echo $querytableitem[$i];?>"><?php echo ucfirst($val_string);?></a></td></tr> <?php
             }
             ?>
         </table>
