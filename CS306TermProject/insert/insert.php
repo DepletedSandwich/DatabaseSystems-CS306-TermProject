@@ -7,7 +7,7 @@
         <title>Insert Operation!</title>
     </head>
     <body>
-        <h1><span><button id="redirectbtn" onclick="redirect_table_index('<?php echo $_GET['id']?>')"><i class="arrow left"></i></button></span>Inserting tuple into <span id="tblname"><?php echo $_GET["id"];?></span></h1>
+        <h1><span><button id="redirectbtn" onclick="redirect_table_index('<?php echo $_GET['id']?>')"><i class="arrow left"></i></button></span>Inserting a row into <span id="tblname"><?php echo $_GET["id"];?></span></h1>
         <?php
         set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject/Misc");        
         include 'config.php';
@@ -75,6 +75,7 @@
             $insert_query=substr_replace($insert_query,"",-1);
             $insert_query=$insert_query.")";
             if ($conn->query($insert_query) === TRUE) {
+                $conn->close();
                 header("Location:http://localhost/CS306TermProject/CS306TermProject/index/index.php?id=".$_GET["id"]);
             }
         }

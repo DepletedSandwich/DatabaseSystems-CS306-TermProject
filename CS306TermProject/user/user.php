@@ -55,7 +55,36 @@
             #league_stats{
                 font-style: italic;
             }
+            #lgtbtn{
+                border:none;
+                background-color:transparent;
+                color:white;
+                transition: all 0.5s;
+                cursor: pointer;
+            }
+            #lgtspan{
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+            #lgtbtn #lgtspan:after {
+              content: '\00bb';
+              position: absolute;
+              opacity: 0;
+              top: 0;
+              right: -20px;
+              transition: 0.5s;
+            }
+            #lgtbtn:hover #lgtspan {
+              padding-right: 25px;
+            }
+            #lgtbtn:hover #lgtspan:after {
+              opacity: 1;
+              right: 0;
+            }
         </style>
+        <script defer src="../Misc/redirect.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand navbar-dark bg-dark">
@@ -76,8 +105,8 @@
                 </li>
               </ul>
             </div>
+            <button id="lgtbtn" onclick="redirect_logout()"><span id="lgtspan">Log out</span></button>
           </nav>
-    </body>
     <?php
     set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject/Misc");
     include 'config.php';
@@ -290,4 +319,5 @@
     }
 }
     ?>
+    </body>
 </html>

@@ -3,6 +3,7 @@
     <head>
         <title>Admin Panel</title>
         <link rel="stylesheet" href="adminstyle.css">
+        <script defer src="../Misc/redirect.js"></script>
     </head>
     <body>
         <h1>Welcome, admin!</h1>
@@ -29,5 +30,6 @@
             }
             ?>
         </table>
+        <span id = "placement"><button id="lgt_btn" onclick="redirect_logout()"><span id = "btn_effct">Log out</span></button></span>
     </body>
 </html>

@@ -7,7 +7,7 @@
         <script defer src="../Misc/redirect.js"></script>
     </head>
     <body>
-        <h1><span><button id="redirectbtn" onclick="redirect_table_index('<?php echo $_GET['id']?>')"><i class="arrow left"></i></button></span>Deleting tuple from <span id="tblname"><?php echo $_GET["id"];?></span></h1>
+        <h1><span><button id="redirectbtn" onclick="redirect_table_index('<?php echo $_GET['id']?>')"><i class="arrow left"></i></button></span>Deleting a row from <span id="tblname"><?php echo $_GET["id"];?></span></h1>
         <?php
         set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject/Misc");
         include 'config.php';
@@ -74,7 +74,6 @@
             }
 
             if ($conn->query($deletion_query) === TRUE) {
-
                 $conn->close();
                 header("Location:http://localhost/CS306TermProject/CS306TermProject/index/index.php?id=".$_GET["id"]);
             }

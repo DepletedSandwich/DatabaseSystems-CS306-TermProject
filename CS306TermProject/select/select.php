@@ -2,10 +2,12 @@
 <html>
     <head>
         <title>Select Operation</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <link rel="stylesheet" href="selectstyle.css">
+        <script defer src="../Misc/redirect.js"></script>
     </head>
     <body>
-        <h1>Selecting rows from <span id="tbl_name"><?php echo $_GET["id"];?></span></h1>
+        <h1><span><button id="redirectbtn" onclick="redirect_table_index('<?php echo $_GET['id']?>')"><i class="arrow left"></i></button></span>Selecting rows from <span id="tbl_name"><?php echo $_GET["id"];?></span></h1>
         <?php
         set_include_path("/xampp/htdocs/CS306TermProject/CS306TermProject/Misc");
         include 'config.php';
@@ -53,47 +55,43 @@
 
         <?php
         if(count($_POST)>0){
-            $select_query = sprintf("SELECT ");
+            $select_query = sprintf("SELECT *");
             $column_num = 0;
             foreach($field_array as $column_name => $data_type){
-                if($_POST[$column_name] != "")
-                    $select_query = $select_query.$column_name.",";
-                    $column_num = $column_num + 1;
+                $column_num = $column_num + 1;
             }
-            $select_query = substr_replace($select_query,"",-1);
-            $id = isset($_GET['id']) ? $_GET['id'] : "BRUH";
             $select_query = $select_query.sprintf(" FROM %s WHERE ",$_GET["id"]);
             foreach($field_array as $column_name => $data_type){
-                if(($data_type == "char" or $data_type == "date") and $_POST[$column_name] != ""){
+                if($_POST[$column_name] != ""){
                     $select_query = $select_query.$_POST[$column_name]." AND ";
-                    
-                }
-                else if(($data_type == "int" or $data_type == "double") and $_POST[$column_name] != ""){
-                    $select_query = $select_query.$_POST[$column_name]." AND ";
-                    
                 }
             }
             
-            $select_query=substr_replace($select_query," ",-4);
-            echo $select_query;
+            if($column_num != 0){
+                $select_query=substr_replace($select_query," ",-4);
+            }
+            else{
+                $select_query = sprintf("SELECT * FROM %s ",$_GET["id"]);
+            }
         }
         ?>
 
-        <table id="tbl" style="overflow-x:auto;">
+        <table id="select_table" style="overflow-x:auto;">
             <tr>
             <?php
-                foreach($field_array as $column_name => $data_type){
-                    if($_POST[$column_name] != "")
+                if(count($_POST)>0){
+                    foreach($field_array as $column_name => $data_type){
                         echo "<th>$column_name</th>";
+                    }
                 } 
             ?>
             </tr>
             <?php
-            if ($result = $conn -> query($select_query)) {
+            if(count($_POST)>0)if($result = $conn -> query($select_query)) {
                 while ($obj = $result -> fetch_array()) {?>
                     <tr>
                     <?php
-                    for ($i=0; $i <= count($column_num); $i++) {
+                    for ($i=0; $i < $column_num; $i++) {
                         $item=$obj[$i];
                         echo "<td>$item</td>";
                     }?>
@@ -104,73 +102,5 @@
             }
         ?>
         </table>
-        
-        <!--
-        <table>
-        <tr>
-            <?php
-            /*
-            foreach($header_array as $header){
-                echo "<th>$header</th>";
-            } 
-            */          
-            ?>
-        </tr>
-            <?php
-            /*
-            if (isset($_POST["id"])==true) {
-                global $selection_query;
-                $selection_query = sprintf("SELECT * FROM stadium WHERE %s",$_POST["id"]);
-
-                if ($conn->query($selection_query) == TRUE) {
-                    echo "Selection of WHERE sid = " . $_POST["id"];
-                
-                    header("Location:http://localhost/CS306/CS_306_Tuto/index/index.php?id=stadium");
-                }
-            }
-            */
-            ?>
-            
-            <?php
-            /*
-            if (isset($_POST["id"])==true) {
-                $selection_query = sprintf("SELECT * FROM stadium WHERE %s",$_POST["id"]);
-                if ($result = $conn -> query($selection_query)) {
-                    while ($obj = $result -> fetch_array()) {?>
-                        <tr>
-                        <?php
-                        for ($i=0; $i < count($header_array); $i++) {
-                            $item=$obj[$i];
-                            echo "<td>$item</td>";
-                        }?>
-                        </tr>
-                    <?php
-                    }
-                    $result -> free_result();
-                }
-            }
-            */
-            
-        ?>
-        </table>
-        -->
-        
-        </table>
-        <form method="post">
-            <input type="submit" name="test" id="test" value="Go back to index?" /><br/>
-        </form>
-
-        <?php
-
-        function testfun()
-        {
-            header("Location:http://localhost/CS306TermProject/CS306TermProject/admin/admin.php");
-        }
-
-        if(array_key_exists('test',$_POST)){
-        testfun();
-        }
-
-        ?>
     </body>
 </html>

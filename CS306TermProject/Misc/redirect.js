@@ -9,4 +9,6 @@ function redirectadmin(){
 function redirect_table_index(tablename){
     window.location.href = "http://localhost/CS306TermProject/CS306TermProject/index/index.php?id="+tablename;
 }
-
+function redirect_logout(){
+    window.location.href = "http://localhost/CS306TermProject/welcome.php";
+}
