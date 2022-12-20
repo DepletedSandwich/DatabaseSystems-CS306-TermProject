@@ -148,7 +148,7 @@
         </table>
     <?php
     } elseif ($_GET["option"] == "refrankings") {
-        $header_view_query="SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'user_referee_rankings'";
+        $header_view_query="SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'user_ranking_referee'";
         $header_array = array();
         if ($result = $conn -> query($header_view_query)) {
             while($obj = $result -> fetch_object()) {
@@ -167,7 +167,7 @@
                 ?>
             </tr>
             <?php
-            $user_match_data_query = "SELECT * FROM user_referee_rankings";
+            $user_match_data_query = "SELECT * FROM user_ranking_referee";
             if ($result = $conn -> query($user_match_data_query)) {
                 while ($obj = $result -> fetch_array()) {?>
                     <tr>
